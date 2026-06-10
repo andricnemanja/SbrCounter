@@ -3,10 +3,10 @@
 // Postavi na false da koristis pravi API.
 const SIMULATION_MODE = true;
 
-const SIM_START  = 100;   // pocetna vrednost simulacije
-const SIM_END    = 999;   // krajnja vrednost simulacije
-const SIM_STEP   = 7;     // za koliko se povecava svaki korak
-const SIM_DELAY  = 1500;  // ms izmedju koraka
+const SIM_START = 100;
+const SIM_END = 1250;
+const SIM_STEP = 7;
+const SIM_DELAY = 1500;
 // ───────────────────────────────────────────────────────────────────
 
 const API_URL =
