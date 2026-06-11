@@ -9,22 +9,29 @@ const SIM_STEP = 7;
 const SIM_DELAY = 1500;
 // ───────────────────────────────────────────────────────────────────
 
+// ─── STOP KONFIGURACIJA ────────────────────────────────────────────
+// Nakon ovog vremena brojac prestaje da se azurira.
+const STOP_ENABLED = false;
+const STOP_TIME = { h: 20, m: 50 };
+// ───────────────────────────────────────────────────────────────────
+
 // ─── BOOST KONFIGURACIJA ───────────────────────────────────────────
 // Ako u BOOST_START_TIME brojac nije dostigao BOOST_THRESHOLD,
 // krece postepeno uvecavanje ka BOOST_TARGET_VALUE do BOOST_END_TIME.
-const BOOST_ENABLED = true;
+const BOOST_ENABLED = false;
 
-const BOOST_START_TIME = { h: 0, m: 3 }; // kada pocinje boost
-const BOOST_END_TIME = { h: 0, m: 6 }; // kada boost mora da dostigne cilj
-const BOOST_THRESHOLD = 750; // ispod ove vrednosti boost se aktivira
+const BOOST_START_TIME = { h: 22, m: 35 }; // kada pocinje boost
+const BOOST_END_TIME = { h: 22, m: 45 }; // kada boost mora da dostigne cilj
+const BOOST_THRESHOLD = 1000; // ispod ove vrednosti boost se aktivira
 const BOOST_TARGET_VALUE = 1073; // vrednost koju treba dostici do END_TIME
 const BOOST_TICK_MS = 1500; // koliko cesto se azurira tokom boosta
 // ───────────────────────────────────────────────────────────────────
 
 const API_URL =
-  "https://events.raceresult.com/api/presenter/window?eventid=405205&name=Finishers&key=71FvK2LpJqDK&lang=&screen=0&index=0";
-const MULTIPLIER = 0.4652;
-const FETCH_INTERVAL = 5000;
+  "https://events.raceresult.com/api/presenter/window?eventid=397892&name=Finishers&key=71FvK2LpJqDK&lang=&screen=0&index=0";
+//const API_URL = "http://localhost:3000/data";
+const MULTIPLIER = 0.7;
+const FETCH_INTERVAL = 1500;
 
 let currentDisplayedValue = null;
 let lastKnownValue = 0;
@@ -169,11 +176,17 @@ function checkBoostCondition() {
   }
 }
 
+// ─── STOP PROVERA ──────────────────────────────────────────────────
+
+function isStopped() {
+  if (!STOP_ENABLED) return false;
+  return nowMs() >= timeToMs(STOP_TIME.h, STOP_TIME.m);
+}
+
 // ─── API FETCH ─────────────────────────────────────────────────────
 
 async function fetchAndUpdate() {
-  // Tokom aktivnog boosta ne prepisujemo vrednost sa API-ja
-  if (boostActive) return;
+  if (isStopped()) return;
 
   try {
     const res = await fetch(API_URL);
@@ -209,6 +222,7 @@ async function fetchAndUpdate() {
 // ─── SIMULACIJA ────────────────────────────────────────────────────
 
 function simulateStep() {
+  if (isStopped()) return;
   if (!boostActive) {
     if (simValue !== currentDisplayedValue) {
       displayNumber(simValue, currentDisplayedValue !== null);
