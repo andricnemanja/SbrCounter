@@ -202,15 +202,18 @@ async function fetchAndUpdate() {
         ? Object.values(row)[1][1]
         : null;
 
-    if (!rawValue || isNaN(rawValue)) return;
+    const isFirstCall = currentDisplayedValue === null;
+
+    if (rawValue === null || rawValue === undefined || isNaN(rawValue)) return;
+    if (rawValue === 0 && !isFirstCall) return;
 
     const computed = computeValue(rawValue);
     if (
       computed !== currentDisplayedValue &&
-      computed > (currentDisplayedValue ?? 0)
+      (isFirstCall || computed > (currentDisplayedValue ?? 0))
     ) {
       lastKnownValue = computed;
-      displayNumber(computed, currentDisplayedValue !== null);
+      displayNumber(computed, !isFirstCall);
     }
   } catch (e) {
     console.warn("Fetch error:", e);
