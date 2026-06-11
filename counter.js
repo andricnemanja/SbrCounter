@@ -28,7 +28,7 @@ const BOOST_TICK_MS = 1500; // koliko cesto se azurira tokom boosta
 // ───────────────────────────────────────────────────────────────────
 
 const API_URL =
-  "https://events.raceresult.com/api/presenter/window?eventid=397892&name=Finishers&key=71FvK2LpJqDK&lang=&screen=0&index=0";
+  "https://events.raceresult.com/api/presenter/window?eventid=405205&name=Finishers&key=71FvK2LpJqDK&lang=&screen=0&index=0";
 //const API_URL = "http://localhost:3000/data";
 const MULTIPLIER = 0.7;
 const FETCH_INTERVAL = 1500;
