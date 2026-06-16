@@ -1,10 +1,10 @@
 // ─── SIMULATION MODE ───────────────────────────────────────────────
 // Postavi na true da testiras animaciju bez API poziva.
 // Postavi na false da koristis pravi API.
-const SIMULATION_MODE = false;
+const SIMULATION_MODE = true;
 
 const SIM_START = 100;
-const SIM_END = 1250;
+const SIM_END = 638;
 const SIM_STEP = 7;
 const SIM_DELAY = 1500;
 // ───────────────────────────────────────────────────────────────────
