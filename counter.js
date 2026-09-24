@@ -1,7 +1,7 @@
 // ─── SIMULATION MODE ───────────────────────────────────────────────
 // Postavi na true da testiras animaciju bez API poziva.
 // Postavi na false da koristis pravi API.
-const SIMULATION_MODE = false;
+const SIMULATION_MODE = true;
 
 const SIM_START = 100;
 const SIM_END = 638;
@@ -102,6 +102,7 @@ function setDigit(reelEl, digit, animate) {
 }
 
 function displayNumber(value, animate) {
+  value = Math.min(value, MAX_VALUE);
   const digits = String(value).split("").map(Number);
 
   if (slots.length !== digits.length) {
