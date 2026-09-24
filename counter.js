@@ -31,6 +31,7 @@ const API_URL =
   "https://events.raceresult.com/api/presenter/window?eventid=425242&name=Finishers&key=71FvK2LpJqDK&lang=&screen=0&index=0";
 //const API_URL = "http://localhost:3000/data";
 const MULTIPLIER = 0.3719 ;
+const MAX_VALUE = 3258;
 const FETCH_INTERVAL = 1500;
 
 let currentDisplayedValue = null;
@@ -64,7 +65,7 @@ function nowMs() {
 }
 
 function computeValue(raw) {
-  return Math.ceil(raw * MULTIPLIER);
+  return Math.min(Math.ceil(raw * MULTIPLIER), MAX_VALUE);
 }
 
 // ─── RENDERING ─────────────────────────────────────────────────────
