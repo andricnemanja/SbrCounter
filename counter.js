@@ -4,8 +4,8 @@
 const SIMULATION_MODE = true;
 
 const SIM_START = 100;
-const SIM_END = 638;
-const SIM_STEP = 7;
+const SIM_END = 5000;
+const SIM_STEP = 500;
 const SIM_DELAY = 1500;
 // ───────────────────────────────────────────────────────────────────
 
